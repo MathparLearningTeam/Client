@@ -32,6 +32,7 @@
                 <version>1.6.0</version>
                 <executions>
                     <execution>
+                        <id>install-npm</id>
                         <phase>initialize</phase>
                         <goals>
                             <goal>exec</goal>
@@ -46,6 +47,7 @@
                         </configuration>
                     </execution>
                     <execution>
+                        <id>build-npm</id>
                         <phase>initialize</phase>
                         <goals>
                             <goal>exec</goal>
