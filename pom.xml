@@ -33,7 +33,7 @@
                     <execution>
                         <id>copy-build</id>
                         <!-- here the phase you need -->
-                        <phase>process-resources</phase>
+                        <phase>initialize</phase>
                         <goals>
                             <goal>copy-resources</goal>
                         </goals>
