@@ -41,7 +41,7 @@
                             <outputDirectory>${project.build.directory}/target/checkout/dist</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>dist</directory>
+                                    <directory>${project.basedir}/dist</directory>
                                 </resource>
                             </resources>
                         </configuration>
