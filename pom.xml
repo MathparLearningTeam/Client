@@ -86,7 +86,7 @@
                 <version>2.5.3</version>
                 <configuration>
                     <scmCommentPrefix>[RELEASE]</scmCommentPrefix>
-                    <tagNameFormat>${version}</tagNameFormat>
+                    <tagNameFormat>${project.version}</tagNameFormat>
                     <!-- TODO extract this to separate profile activated only when initialize phase has ran-->
                     <developmentVersion>${parsedVersion.majorVersion}.${parsedVersion.nextMinorVersion}.0-SNAPSHOT</developmentVersion>
                 </configuration>
