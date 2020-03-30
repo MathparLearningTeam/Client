@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>mathpar.web.learning</groupId>
     <artifactId>client</artifactId>
-    <version>0.9.0-SNAPSHOT</version>
+    <version>0.9.0</version>
     <packaging>jar</packaging>
     <name>Client</name>
     <description>This module serves to distribute client assets to other modules.</description>
@@ -11,7 +11,7 @@
     <scm>
         <url>https://github.com/MathparLearningTeam/Client.git</url>
         <developerConnection>svm:git:https://github.com/MathparLearningTeam/Client.git</developerConnection>
-        <tag>HEAD</tag>
+        <tag>client-0.9.0</tag>
     </scm>
 
     <properties>
