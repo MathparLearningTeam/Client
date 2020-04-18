@@ -20,12 +20,12 @@
 </template>
 
 <script>
-    import AuthHeader from "@/components/AuthHeader";
-    import {userMixin} from "@/mixins/user";
+    import AuthHeader from "../../components/AuthHeader";
+    import accountMixin from "../../mixins/account";
 
     export default {
         name: "RestorePassword",
-        mixins: [userMixin],
+        mixins: [accountMixin],
         components: {
             AuthHeader
         },

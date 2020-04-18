@@ -35,15 +35,15 @@
 </template>
 
 <script>
-    import {userMixin} from "@/mixins/user";
-    import AuthHeader from "@/components/AuthHeader";
+    import accountMixin from "../../mixins/account";
+    import AuthHeader from "../../components/AuthHeader";
     import {ValidationProvider, ValidationObserver} from 'vee-validate';
-    import {password, email, required, emailAvailable} from "../../validation/rules";
+    import "../../validation/rules";
 
 
     export default {
         name: "Registration",
-        mixins: [userMixin],
+        mixins: [accountMixin],
         components: {
             AuthHeader,
             ValidationProvider,
@@ -59,7 +59,7 @@
             }
         },
         methods: {
-            register: function (event) {
+            register: function () {
                 this.$refs.formValidator.validate().then(success => {
                     if(!success){
                         return;

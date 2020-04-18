@@ -3,7 +3,7 @@
 </template>
 
 <script>
-    import {accountStore} from "../../store/accountStore";
+    import accountStore from "../../store/accountStore";
 
     export default {
         name: "Account",

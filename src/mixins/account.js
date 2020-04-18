@@ -1,23 +1,19 @@
 import api from '../api'
-import store from '../store/authenticationStore'
-import {accountStore} from '../store/accountStore'
+import authenticationStore from '../store/authenticationStore'
+import accountStore from '../store/accountStore'
 
-export const userMixin = {
+const accountMixin = {
     methods: {
         authenticate(data) {
             api.account.authenticate(data).then(response => {
-                localStorage.setItem('token', response.token);
-                store.state.token = response.token;
-                // @ts-ignore
-                this.$router.push('/profile');
+                authenticationStore.commit('setToken', response.token)
+                this.$router.push('/account');
             })
         },
         createAccount(data) {
             api.account.createAccount(data).then(response => {
-                localStorage.setItem('token', response.authentication.token);
-                store.state.token = response.authentication.token;
+                authenticationStore.commit('setToken', response.authentication.token)
                 accountStore.commit('setAccount', response);
-                // @ts-ignore
                 this.$router.push('/account');
             })
         },
@@ -29,3 +25,5 @@ export const userMixin = {
         }
     }
 };
+
+export default accountMixin;

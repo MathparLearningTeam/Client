@@ -11,7 +11,7 @@ const accountStore = new Vuex.Store({
   },
   getters: {
     async account(state) {
-      if(state.account.accountId === -1){
+      if(state.account.accountId === Account.placeholder().accountId){
         await api.account.getAccount().then(response => state.account = Account.fromResponse(response));
       }
       return state.account;
@@ -20,6 +20,9 @@ const accountStore = new Vuex.Store({
   mutations: {
     setAccount(state, response) {
       state.account = Account.fromResponse(response);
+    },
+    clearAccount(state){
+      state.account = Account.placeholder();
     }
   },
   actions: {
@@ -28,4 +31,4 @@ const accountStore = new Vuex.Store({
   }
 })
 
-export {accountStore};
+export default accountStore;
