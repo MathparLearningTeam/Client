@@ -8,7 +8,7 @@
                 <section class="box" lang="en">
                     <b-field>
                         <ValidationProvider rules="required|email|email-available" v-slot="{errors}" mode="passive">
-                            <b-input placeholder="Email" type="email" v-model="data.directorEmail" required></b-input>
+                            <b-input placeholder="Email" type="email" v-model="data.email" required></b-input>
                             <span>{{ errors[0] }}</span>
                         </ValidationProvider>
                     </b-field>

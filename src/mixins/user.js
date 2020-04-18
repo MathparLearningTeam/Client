@@ -1,5 +1,6 @@
 import api from '../api'
-import store from '../store'
+import store from '../store/authenticationStore'
+import {accountStore} from '../store/accountStore'
 
 export const userMixin = {
     methods: {
@@ -15,6 +16,7 @@ export const userMixin = {
             api.account.createAccount(data).then(response => {
                 localStorage.setItem('token', response.authentication.token);
                 store.state.token = response.authentication.token;
+                accountStore.commit('setAccount', response);
                 // @ts-ignore
                 this.$router.push('/account');
             })

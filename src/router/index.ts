@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import store from '../store'
+import store from '../store/authenticationStore'
 // @ts-ignore
 import api from '../api'
 
@@ -46,25 +46,6 @@ const routes = [
 const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
-});
-
-router.beforeEach((to, from, next) => {
-  if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (store.state.user) {
-      next();
-    } else {
-      api.user.user().then((response: any) => {
-        store.state.user = response;
-        if (!store.state.user) {
-          next({ name: 'profile' })
-        } else {
-          next()
-        }
-      });
-    }
-  } else {
-    next()
-  }
 });
 
 export default router
