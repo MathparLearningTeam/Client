@@ -16,30 +16,30 @@ const routes = [
   {
     path: '/registration',
     name: 'registration',
-    component: () => import('../views/auth/Registration.vue')
+    component: () => import('../views/account/Registration.vue')
   },
   {
     path: '/login',
     name: 'login',
-    component: () => import('../views/auth/Login.vue')
+    component: () => import('../views/account/Login.vue')
   },
   {
     path: '/restore',
     name: 'restore',
-    component: () => import('../views/auth/RestorePassword.vue')
+    component: () => import('../views/account/RestorePassword.vue')
   },
   {
     path: '/restore/:t',
     name: 'set-password',
-    component: () => import('../views/auth/SetPassword.vue')
+    component: () => import('../views/account/SetPassword.vue')
   },
   {
-    path: '/profile',
-    name: 'profile',
+    path: '/account',
+    name: 'account',
     meta: {
       requiresAuth: true
     },
-    component: () => import('../views/school/SchoolProfile.vue')
+    component: () => import('../views/account/Account.vue')
   }
 ];
 

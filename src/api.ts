@@ -12,7 +12,7 @@ const get = {
 };
 
 const API = axios.create({
-    baseURL: process.env.VUE_APP_API_PREFIX + '/api',
+    baseURL: process.env.VUE_APP_API_PREFIX,
     headers: get.headers(),
     paramsSerializer: (params) => {
         return qs.stringify(params, {arrayFormat: 'repeat'});
@@ -51,11 +51,12 @@ API.interceptors.response.use(resp => resp.data, (error) => {
     return Promise.reject(error.response.data);
 });
 
-const authentication = {
+const account = {
+    checkEmail: (email: any) => API.get(`/account/api/emailAvailable?email=${email}`),
+    createAccount: (params: any) => API.post(`/account/api/`, params),
     authenticate: (params: any) => API.post(`/authentication/authenticate`, params),
     restore: (params: any) => API.get(`/restoration/restorePassword`, {params}),
-    setPassword: (params: any) => API.post(`/restoration/changePassword`, params),
-    createSchool: (params: any) => API.post(`/school/register`, params)
+    setPassword: (params: any) => API.post(`/restoration/changePassword`, params)
 };
 
 const user = {
@@ -71,5 +72,5 @@ const school = {
 };
 
 export default {
-    authentication, user, school
+    account, user, school
 }
