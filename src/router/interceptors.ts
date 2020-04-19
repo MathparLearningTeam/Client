@@ -1,7 +1,7 @@
 import authenticationStore from '../store/authenticationStore'
 
 const authenticated = function(to, from, next){
-    if(to.matched.some(record => record.meta.authenticated)){
+    if(to.meta.authenticated){
         const redirectTo = to.meta.redirectTo || "login";
         if(!authenticationStore.getters.getToken){
             next({name: redirectTo});
@@ -12,7 +12,7 @@ const authenticated = function(to, from, next){
 }
 
 const notAuthenticated = function (to, from, next) {
-    if(to.matched.some(record => record.meta.notAuthenticated)){
+    if(to.meta.notAuthenticated){
         const redirectTo = to.meta.redirectTo || "account";
         if(authenticationStore.getters.getToken) {
             next({name: redirectTo});

@@ -4,20 +4,18 @@ import router from "@/router";
 import qs from 'qs';
 import authStore from './store/authenticationStore'
 
-const get = {
-    headers: () => {
-        return authStore.getters.getToken ? {'AUTH-TOKEN': authStore.state.token} : {}
-    }
-};
-
 const API = axios.create({
     baseURL: process.env.VUE_APP_API_PREFIX,
-    headers: get.headers(),
     paramsSerializer: (params) => {
         return qs.stringify(params, {arrayFormat: 'repeat'});
     }
 });
 
+API.interceptors.request.use(conf => {
+    let token = authStore.getters.getToken;
+    if(token) conf.headers['AUTH-TOKEN'] = token;
+    return conf;
+})
 API.interceptors.response.use(resp => resp.data, (error) => {
     if (error.response) {
         if (error.response.status === 401) {
