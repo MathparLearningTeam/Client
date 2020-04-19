@@ -54,6 +54,15 @@ const routes = [
       redirectTo: 'login'
     },
     component: () => import('../views/account/Account.vue')
+  },
+  {
+    path: '/logout',
+    name: 'logout',
+    meta: {
+      authenticated: true,
+      redirectTo: '/'
+    },
+    component: () => import('../views/Logout.vue')
   }
 ];
 

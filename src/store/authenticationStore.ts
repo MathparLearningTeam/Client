@@ -19,6 +19,10 @@ const store = new Vuex.Store({
     setToken(state, token){
       localStorage.setItem(localStorageKey, token);
       state.token = token;
+    },
+    clearToken(state){
+      localStorage.removeItem(localStorageKey);
+      state.token = ''
     }
   },
   actions: {
