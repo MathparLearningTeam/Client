@@ -3,6 +3,7 @@ import authStore from "@/store/authenticationStore";
 import router from "@/router";
 import Vue from "vue";
 import qs from "qs";
+import profileStore from "@/store/profileStore";
 
 const API = axios.create({
     baseURL: process.env.VUE_APP_API_PREFIX,
@@ -14,6 +15,8 @@ const API = axios.create({
 API.interceptors.request.use(conf => {
     let token = authStore.getters.getToken;
     if(token) conf.headers['AUTH-TOKEN'] = token;
+    let profile = profileStore.getters.get;
+    if(profile) conf.headers['PROFILE-ID'] = profile.profileId
     return conf;
 })
 API.interceptors.response.use(resp => resp.data, (error) => {

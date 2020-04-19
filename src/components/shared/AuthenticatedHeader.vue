@@ -1,5 +1,6 @@
 <template>
     <div id="nav">
+        <router-link to="/chooseProfile">Choose profile</router-link>
         <router-link to="/logout">Logout</router-link>
     </div>
 </template>
@@ -19,6 +20,7 @@
             font-weight: bold;
             color: white;
             opacity: .5;
+            margin: 10px;
 
             &.router-link-exact-active {
                  opacity: 1;

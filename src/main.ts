@@ -8,7 +8,13 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 // @ts-ignore
 import { KinesisContainer, KinesisElement } from 'vue-kinesis'
+import moment from 'moment'
 
+Vue.filter('formatDate', function(value) {
+    if (value) {
+        return moment(String(value)).format('MM/DD/YYYY')
+    }
+})
 Vue.component('kinesis-container', KinesisContainer)
 Vue.component('kinesis-element', KinesisElement)
 

@@ -63,6 +63,24 @@ const routes = [
       redirectTo: '/'
     },
     component: () => import('../views/Logout.vue')
+  },
+  {
+    path: '/chooseProfile',
+    name: 'ChooseProfile',
+    meta: {
+      authenticated: true,
+      redirectTo: '/login'
+    },
+    component: () => import('../views/ChooseProfile.vue')
+  },
+  {
+    path: '/school',
+    name: 'School',
+    meta: {
+      authenticated: true,
+      redirectTo: '/'
+    },
+    component: () => import('../views/school/School.vue')
   }
 ];
 

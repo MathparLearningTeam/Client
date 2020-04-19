@@ -13,7 +13,7 @@ const accountMixin = {
         createAccount(data) {
             api.account.createAccount(data).then(response => {
                 authenticationStore.commit('setToken', response.authentication.token)
-                accountStore.commit('setAccount', response);
+                accountStore.commit('set', response);
                 this.$router.push('/account');
             })
         },

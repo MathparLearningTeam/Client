@@ -10,7 +10,7 @@ const accountStore = new Vuex.Store({
     account: Account.placeholder()
   },
   getters: {
-    async account(state) {
+    async get(state) {
       if(state.account.accountId === Account.placeholder().accountId){
         await api.account.getAccount().then(response => state.account = Account.fromResponse(response));
       }
@@ -18,10 +18,10 @@ const accountStore = new Vuex.Store({
     }
   },
   mutations: {
-    setAccount(state, response) {
+    set(state, response) {
       state.account = Account.fromResponse(response);
     },
-    clearAccount(state){
+    clear(state){
       state.account = Account.placeholder();
     }
   },
