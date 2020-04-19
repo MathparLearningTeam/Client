@@ -20,7 +20,7 @@
 </template>
 
 <script>
-    import AuthHeader from "../../components/AuthHeader";
+    import AuthHeader from "../../components/shared/AuthHeader";
     import accountMixin from "../../mixins/account";
 
     export default {

@@ -36,7 +36,7 @@
 
 <script>
     import accountMixin from "../../mixins/account";
-    import AuthHeader from "../../components/AuthHeader";
+    import AuthHeader from "../../components/shared/AuthHeader";
     import {ValidationProvider, ValidationObserver} from 'vee-validate';
     import "../../validation/rules";
 

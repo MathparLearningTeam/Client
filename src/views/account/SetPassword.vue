@@ -21,7 +21,7 @@
 
 <script>
     import accountMixin from "../../mixins/account";
-    import AuthHeader from "../../components/AuthHeader";
+    import AuthHeader from "../../components/shared/AuthHeader";
 
     export default {
         name: "SetPassword",
