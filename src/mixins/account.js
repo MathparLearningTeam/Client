@@ -1,4 +1,4 @@
-import api from '../api'
+import api from '../api/api'
 import authenticationStore from '../store/authenticationStore'
 import accountStore from '../store/accountStore'
 

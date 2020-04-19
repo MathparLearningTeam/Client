@@ -1,5 +1,5 @@
 import {extend} from 'vee-validate'
-import api from "../api";
+import api from "../api/api";
 import {email as emailRule, required as requiredRule} from "vee-validate/dist/rules";
 
 const strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*_])(?=.{8,})");
