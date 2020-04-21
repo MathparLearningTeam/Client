@@ -2,30 +2,30 @@
     <div>
         <auth-header></auth-header>
         <div class="container registration">
-            <h1 class="title">Restore Password</h1>
+            <h1 class="title">Set New Password</h1>
             <section class="box" lang="en" v-if="!isSent">
                 <b-field>
-                    <b-input placeholder="Email" type="email" v-model="data.email" required></b-input>
+                    <b-input placeholder="New Password" type="password" password-reveal v-model="data.newPassword" required></b-input>
                 </b-field>
 
                 <div class="buttons">
-                    <b-button v-on:click="submit" type="is-primary" expanded>Send Restore Link</b-button>
+                    <b-button v-on:click="submit" type="is-primary" expanded>Set Password</b-button>
                 </div>
             </section>
             <section class="box" v-if="isSent">
-                <p class="notification is-success">Restore link was successfully sent to your e-mail!</p>
+                <p class="notification is-success">New password was successfully set! Go to <router-link to="/login">Login</router-link></p>
             </section>
         </div>
     </div>
 </template>
 
 <script>
-    import AuthHeader from "@/components/AuthHeader";
-    import {userMixin} from "@/mixins/user";
+    import accountMixin from "../../mixins/account";
+    import AuthHeader from "../../components/shared/AuthHeader";
 
     export default {
-        name: "RestorePassword",
-        mixins: [userMixin],
+        name: "SetPassword",
+        mixins: [accountMixin],
         components: {
             AuthHeader
         },
@@ -33,13 +33,14 @@
             return {
                 isSent: false,
                 data: {
-                    email: ''
+                    token: this.$route.params.t,
+                    newPassword: ''
                 }
             }
         },
         methods: {
             submit() {
-                this.restore(this.data).then(() => this.isSent = true);
+                this.setPassword(this.data).then(() => this.isSent = true);
             }
         }
     }

@@ -20,5 +20,6 @@
         -moz-osx-font-smoothing: grayscale;
         text-align: center;
         color: white;
+        height: 100%;
     }
 </style>

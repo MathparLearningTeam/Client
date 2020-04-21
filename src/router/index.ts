@@ -1,9 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
-import store from '../store'
-// @ts-ignore
-import api from '../api'
+import {authenticated, notAuthenticated} from "@/router/interceptors";
 
 Vue.use(VueRouter);
 
@@ -11,35 +8,79 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: Home
+    component: () => import('../views/Home.vue')
   },
   {
     path: '/registration',
     name: 'registration',
-    component: () => import('../views/auth/Registration.vue')
+    meta: {
+      notAuthenticated: true,
+      redirectTo: 'account'
+    },
+    component: () => import('../views/account/Registration.vue'),
   },
   {
     path: '/login',
     name: 'login',
-    component: () => import('../views/auth/Login.vue')
+    meta: {
+      notAuthenticated: true,
+      redirectTo: 'account'
+    },
+    component: () => import('../views/account/Login.vue')
   },
   {
     path: '/restore',
     name: 'restore',
-    component: () => import('../views/auth/RestorePassword.vue')
+    meta: {
+      notAuthenticated: true,
+      redirectTo: 'account'
+    },
+    component: () => import('../views/account/RestorePassword.vue')
   },
   {
     path: '/restore/:t',
     name: 'set-password',
-    component: () => import('../views/auth/SetPassword.vue')
+    meta: {
+      notAuthenticated: true,
+      redirectTo: 'account'
+    },
+    component: () => import('../views/account/SetPassword.vue')
   },
   {
-    path: '/profile',
-    name: 'profile',
+    path: '/account',
+    name: 'account',
     meta: {
-      requiresAuth: true
+      authenticated: true,
+      redirectTo: 'login'
     },
-    component: () => import('../views/school/SchoolProfile.vue')
+    component: () => import('../views/account/Account.vue')
+  },
+  {
+    path: '/logout',
+    name: 'logout',
+    meta: {
+      authenticated: true,
+      redirectTo: '/'
+    },
+    component: () => import('../views/Logout.vue')
+  },
+  {
+    path: '/choose-profile',
+    name: 'ChooseProfile',
+    meta: {
+      authenticated: true,
+      redirectTo: '/login'
+    },
+    component: () => import('../views/ChooseProfile.vue')
+  },
+  {
+    path: '/school',
+    name: 'School',
+    meta: {
+      authenticated: true,
+      redirectTo: '/'
+    },
+    component: () => import('../views/school/School.vue')
   }
 ];
 
@@ -48,23 +89,7 @@ const router = new VueRouter({
   routes
 });
 
-router.beforeEach((to, from, next) => {
-  if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (store.state.user) {
-      next();
-    } else {
-      api.user.user().then((response: any) => {
-        store.state.user = response;
-        if (!store.state.user) {
-          next({ name: 'profile' })
-        } else {
-          next()
-        }
-      });
-    }
-  } else {
-    next()
-  }
-});
+router.beforeEach(authenticated);
+router.beforeEach(notAuthenticated)
 
 export default router

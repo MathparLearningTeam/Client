@@ -5,46 +5,42 @@
         </header>
         <b-tabs position="is-centered" class="block">
             <b-tab-item label="Head Teachers">
-                <school-head-teachers v-bind:columns="columns" v-bind:headTeachers="users.headTeachers"></school-head-teachers>
+                <profiles-list v-bind:columns="columns" v-bind:profiles="users.headTeachers" name="head teacher"></profiles-list>
             </b-tab-item>
             <b-tab-item label="Teachers">
-                <school-teachers v-bind:columns="columns" v-bind:teachers="users.teachers"></school-teachers>
+                <profiles-list v-bind:columns="columns" v-bind:profiles="users.teachers" name="teacher"></profiles-list>
             </b-tab-item>
             <b-tab-item label="Students">
-                <school-students v-bind:columns="columns" v-bind:students="users.students"></school-students>
+                <profiles-list v-bind:columns="columns" v-bind:profiles="users.students" name="student"></profiles-list>
             </b-tab-item>
         </b-tabs>
     </div>
 </template>
 
 <script>
-    import SchoolStudents from "@/components/school/SchoolStudents";
-    import SchoolTeachers from "@/components/school/SchoolTeachers";
-    import SchoolHeadTeachers from "@/components/school/SchoolHeadTeachers";
+    import ProfilesList from "./ProfilesList";
 
     export default {
         name: "school-users",
         props: ['users'],
         components: {
-            SchoolHeadTeachers,
-            SchoolTeachers,
-            SchoolStudents
+            ProfilesList
         },
         data() {
             return {
                 columns: [
                     {
-                        field: 'userId',
+                        field: 'profileId',
                         label: 'ID',
                         width: '40',
                         numeric: true
                     },
                     {
-                        field: 'userName',
+                        field: 'name',
                         label: 'Name',
                     },
                     {
-                        field: 'userEmail',
+                        field: 'email',
                         label: 'E-mail',
                     }
                 ]

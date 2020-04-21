@@ -13,16 +13,17 @@
                     </figure>
                 </div>
                 <div class="media-content">
-                    <p class="title is-4">{{school.schoolAddress}}</p>
-                    <p class="subtitle is-6">{{school.schoolName}}</p>
+                    <p class="title is-4">{{school.schoolName}}</p>
+                    <p class="subtitle is-6">{{school.schoolAddress}}</p>
                 </div>
             </div>
 
             <div class="content">
-                <strong>Director:</strong> {{school.director.userName}} (<a :href="'mailto:' + school.director.userEmail">{{school.director.userEmail}}</a>)
+                <!-- TODO Change to director name, once fetching is established-->
+                <strong>Director:</strong> {{school.director.profileName}}
             </div>
         </div>
-        <footer class="card-footer">
+        <footer class="card-footer" v-if="profile.role==='Director'">
             <p class="card-footer-item">Edit</p>
             <p class="card-footer-item">Delete</p>
         </footer>
@@ -31,8 +32,19 @@
 
 <script>
 
+    import profileStore from "../../store/profileStore";
+    import {Profile} from "../../models/Profile";
+
     export default {
         name: "school-card",
+        data(){
+            return {
+                profile: Profile.placeholder()
+            }
+        },
+        async mounted(){
+            this.profile = profileStore.getters.get
+        },
         props: ['school']
     }
 </script>
