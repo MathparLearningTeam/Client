@@ -2,9 +2,14 @@
     <div>
         <authenticated-header></authenticated-header>
         <div id="main-container">
-            <div id="header">Choose profile from the list:</div>
-            <div id="list-container">
-                <div class="list-item" v-for="profile in profiles" v-on:click="chooseProfile(profile)">{{profile.profileName}} (created {{profile.creationDate | formatDate}})</div>
+            <div class="card">
+                <nav class="panel">
+                    <p class="panel-heading">Choose profile from the list:</p>
+                    <a class="panel-block" v-for="profile in profiles" v-on:click="chooseProfile(profile)">
+                        <span class="panel-icon"><i class="fas fa-user" aria-hidden="true"></i></span>
+                        {{profile.profileName}} (created {{profile.creationDate | formatDate}})
+                    </a>
+                </nav>
             </div>
         </div>
     </div>
@@ -44,6 +49,11 @@
         border-radius: 5px;
         color: black;
         width: 60%;
+
+        .panel-heading {
+            font-weight: bold;
+            text-align: left;
+        }
 
         #header{
             height: 25%;
