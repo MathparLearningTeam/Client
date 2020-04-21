@@ -1,12 +1,12 @@
 <template>
     <div>
-        <b-table v-if="students.length" :data="students" :columns="columns"></b-table>
-        <p class="notification" v-else>There are no students in this school</p>
+        <b-table v-if="profiles.length" :data="profiles" :columns="columns"></b-table>
+        <p class="notification" v-else>There are no {{name}}s in this school</p>
         <b-modal :active.sync="isComponentModalActive" has-modal-card trap-focus aria-role="dialog" aria-modal width="400">
-            <create-profile v-on:new-student="students.push($event)" role="Student"></create-profile>
+            <create-profile :current-profiles="profiles" role="HeadTeacher"></create-profile>
         </b-modal>
         <footer class="card-footer">
-            <button class="button is-primary is-medium" @click="isComponentModalActive = true">Create Student</button>
+            <button class="button is-primary is-medium" @click="isComponentModalActive = true">Create  {{name}}</button>
         </footer>
     </div>
 </template>
@@ -15,8 +15,8 @@
     import CreateProfile from "./create-user/CreateProfile";
 
     export default {
-        name: "school-students",
-        props: ['students', 'columns'],
+        name: "profiles-list",
+        props: ['profiles', 'columns', 'name'],
         components: {
             CreateProfile
         },
@@ -24,6 +24,11 @@
             return {
                 isComponentModalActive: false
             }
+        },
+        mounted() {
+            this.profiles.forEach(profile => {
+                if(!profile.name) this.$set(profile, 'name', "Not yet created")
+            })
         }
     }
 </script>

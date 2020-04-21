@@ -1,7 +1,7 @@
 <template>
     <div>
         <school-header></school-header>
-        <p class="title white">School: {{school.id}}!</p>
+        <p class="title white">School: {{school.schoolName}}!</p>
             <div class="columns is-mobile">
                 <div class="column is-full-mobile is-half-tablet is-one-third-desktop">
                     <school-card v-bind:school="school"></school-card>
@@ -38,7 +38,19 @@
         },
         async mounted() {
             this.school = await schoolStore.getters.get
-            api.school.getSchoolUsers().then(response => this.schoolUsers = response)
+            api.school.getSchoolUsers().then(schoolProfiles => {
+                this.schoolUsers = schoolProfiles;
+                let accounts = {};
+                this.schoolUsers.teachers.map(profile => accounts[profile.accountId]=profile);
+                this.schoolUsers.students.map(profile => accounts[profile.accountId]=profile);
+                this.schoolUsers.headTeachers.map(profile => accounts[profile.accountId]=profile)
+                api.account.getDetails(Object.keys(accounts)).then(accountDetails =>{
+                    accountDetails.forEach(detail => {
+                        this.$set(accounts[detail.id], 'name', detail.name);
+                        this.$set(accounts[detail.id], 'email', detail.email);
+                    })
+                })
+            })
         }
     }
 </script>

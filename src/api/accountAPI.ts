@@ -6,7 +6,8 @@ const account = {
     getAccount: () => API.get("/account/api/"),
     authenticate: (params: any) => API.post("/account/api/authenticate", params),
     restore: (data: any) => API.post("/account/api/restoreCredentials", data),
-    setPassword: (params: any) => API.post("/account/api/changePassword", params)
+    setPassword: (params: any) => API.post("/account/api/changePassword", params),
+    getDetails: (accountIds: string[]) => API.get("/account/api/getPublicInfo", {params: {accountIds: accountIds}})
 };
 
 export default account;

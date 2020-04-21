@@ -1,11 +1,11 @@
 <template>
     <div class="modal-card" ref="modal">
         <header class="modal-card-head">
-            <p class="modal-card-title">Create Teacher</p>
+            <p class="modal-card-title">Create user</p>
         </header>
         <section class="modal-card-body">
             <b-field><b-input type="email" v-model="data.createProfilePayload.email" placeholder="E-mail" required></b-input></b-field>
-            <b-field><b-input v-model="data.createProfilePayload.role" placeholder="Role" required></b-input></b-field>
+            <b-field><b-input v-model="data.createProfilePayload.role" placeholder="Role" disabled></b-input></b-field>
         </section>
         <footer class="modal-card-foot">
             <button class="button" type="button" @click="$parent.close()">Close</button>
@@ -17,6 +17,7 @@
 <script>
     import {SchoolMixin} from "@/mixins/school";
     import CreateProfilePayload from "../../../models/payloads/CreateProfilePayload";
+    import api from "../../../api/api";
 
     export default {
         name: "create-profile",
@@ -34,14 +35,17 @@
         methods: {
             submit() {
                 const loading = this.$buefy.loading.open(this.$refs.modal.$el);
-                this.createProfile(this.data.createProfilePayload).then(resp => {
-                    loading.close();
-                    this.$emit('new-teacher', resp);
+                this.createProfile(this.data.createProfilePayload).then(profile => {
+                    api.account.getDetails([""+profile.accountId]).then(accountDetails =>{
+                        profile.name=accountDetails[0].name;
+                        profile.email=accountDetails[0].email;
+                        this.currentProfiles.push(profile);
+                    });
                     this.$parent.close();
-                });
+                }).finally(()=>loading.close());
             }
         },
-        props: ['role']
+        props: ['role', 'currentProfiles']
     }
 </script>
 
