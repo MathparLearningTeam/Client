@@ -65,7 +65,7 @@ const routes = [
     component: () => import('../views/Logout.vue')
   },
   {
-    path: '/chooseProfile',
+    path: '/choose-profile',
     name: 'ChooseProfile',
     meta: {
       authenticated: true,
