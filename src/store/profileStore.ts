@@ -4,8 +4,11 @@ import api from "@/api/api"
 import {Account} from "@/models/Account";
 import {School} from "@/models/School";
 import {Profile} from "@/models/Profile";
+import {currentConfig} from "vee-validate/dist/types/config";
 
 Vue.use(Vuex)
+
+const localStorageKey = 'profile'
 
 const profileStore = new Vuex.Store({
     state: {
@@ -14,7 +17,11 @@ const profileStore = new Vuex.Store({
     },
     getters: {
         get(state) {
-            if(state.currentProfile.profileId === Profile.placeholder().profileId) return null;
+            if(state.currentProfile.profileId === Profile.placeholder().profileId) {
+                let currentProfile = localStorage.getItem(localStorageKey);
+                if (!currentProfile) return null;
+                state.currentProfile = JSON.parse(currentProfile);
+            }
             return state.currentProfile;
         },
         async getAll(state){
@@ -25,8 +32,10 @@ const profileStore = new Vuex.Store({
     mutations: {
         set(state, response) {
             state.currentProfile = Profile.fromResponse(response);
+            localStorage.setItem(localStorageKey, JSON.stringify(state.currentProfile))
         },
         clear(state){
+            localStorage.removeItem(localStorageKey)
             state.currentProfile = Profile.placeholder();
             state.profiles = []
         }

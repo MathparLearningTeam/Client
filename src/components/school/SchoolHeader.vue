@@ -25,7 +25,7 @@
         <template slot="end">
             <b-navbar-item tag="div">
                 <div class="buttons">
-                    <a class="button is-primary"><strong>Logout</strong></a>
+                    <router-link to="/logout"><strong>Logout</strong></router-link>
                 </div>
             </b-navbar-item>
         </template>
