@@ -18,9 +18,9 @@
 </template>
 
 <script>
-    import SchoolStudents from "@/components/school/SchoolStudents";
-    import SchoolTeachers from "@/components/school/SchoolTeachers";
-    import SchoolHeadTeachers from "@/components/school/SchoolHeadTeachers";
+    import SchoolStudents from "./SchoolStudents";
+    import SchoolTeachers from "./SchoolTeachers";
+    import SchoolHeadTeachers from "./SchoolHeadTeachers";
 
     export default {
         name: "school-users",
@@ -34,17 +34,17 @@
             return {
                 columns: [
                     {
-                        field: 'userId',
+                        field: 'profileId',
                         label: 'ID',
                         width: '40',
                         numeric: true
                     },
                     {
-                        field: 'userName',
+                        field: 'profileName',
                         label: 'Name',
                     },
                     {
-                        field: 'userEmail',
+                        field: 'accountId',
                         label: 'E-mail',
                     }
                 ]

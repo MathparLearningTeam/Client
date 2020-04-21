@@ -1,11 +1,11 @@
 <template>
     <div class="modal-card" ref="modal">
         <header class="modal-card-head">
-            <p class="modal-card-title">Create Head Teacher</p>
+            <p class="modal-card-title">Create Teacher</p>
         </header>
         <section class="modal-card-body">
-            <b-field><b-input type="email" v-model="data.email" placeholder="E-mail" required></b-input></b-field>
-            <b-field><b-input v-model="data.name" placeholder="Name" required></b-input></b-field>
+            <b-field><b-input type="email" v-model="data.createProfilePayload.email" placeholder="E-mail" required></b-input></b-field>
+            <b-field><b-input v-model="data.createProfilePayload.role" placeholder="Role" required></b-input></b-field>
         </section>
         <footer class="modal-card-foot">
             <button class="button" type="button" @click="$parent.close()">Close</button>
@@ -16,28 +16,32 @@
 
 <script>
     import {SchoolMixin} from "@/mixins/school";
+    import CreateProfilePayload from "../../../models/payloads/CreateProfilePayload";
 
     export default {
-        name: "create-head-teacher",
+        name: "create-profile",
         mixins: [SchoolMixin],
         data() {
             return {
                 data: {
-                    email: '',
-                    name: ''
+                    createProfilePayload: new CreateProfilePayload()
                 }
             }
+        },
+        mounted() {
+            this.data.createProfilePayload.role = this.role
         },
         methods: {
             submit() {
                 const loading = this.$buefy.loading.open(this.$refs.modal.$el);
-                this.createHeadTeacher(this.data).then(resp => {
+                this.createProfile(this.data.createProfilePayload).then(resp => {
                     loading.close();
-                    this.$emit('new-head-teacher', resp);
+                    this.$emit('new-teacher', resp);
                     this.$parent.close();
                 });
             }
-        }
+        },
+        props: ['role']
     }
 </script>
 

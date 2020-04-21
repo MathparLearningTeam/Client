@@ -3,7 +3,7 @@
         <b-table v-if="teachers.length" :data="teachers" :columns="columns"></b-table>
         <p class="notification" v-else>There are no teachers in this school</p>
         <b-modal :active.sync="isComponentModalActive" has-modal-card trap-focus aria-role="dialog" aria-modal width="400">
-            <create-teacher v-on:new-teacher="teachers.push($event)"></create-teacher>
+            <create-profile v-on:new-teacher="teachers.push($event)" role="Teacher"></create-profile>
         </b-modal>
         <footer class="card-footer">
             <button class="button is-primary is-medium" @click="isComponentModalActive = true">Create Teacher</button>
@@ -12,13 +12,13 @@
 </template>
 
 <script>
-    import CreateTeacher from "@/components/school/create-user/CreateTeacher";
+    import CreateProfile from "./create-user/CreateProfile";
 
     export default {
         name: "school-teachers",
         props: ['teachers', 'columns'],
         components: {
-            CreateTeacher
+            CreateProfile
         },
         data() {
             return {
