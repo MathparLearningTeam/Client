@@ -6,6 +6,7 @@ import Buefy from 'buefy'
 import 'buefy/dist/buefy.css'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import '@mdi/font/css/materialdesignicons.css'
 // @ts-ignore
 import { KinesisContainer, KinesisElement } from 'vue-kinesis'
 import moment from 'moment'

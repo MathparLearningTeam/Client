@@ -8,7 +8,7 @@ import {currentConfig} from "vee-validate/dist/types/config";
 
 Vue.use(Vuex)
 
-const localStorageKey = 'profile'
+const localStorageKey = 'profile';
 
 const profileStore = new Vuex.Store({
     state: {
@@ -17,15 +17,15 @@ const profileStore = new Vuex.Store({
     },
     getters: {
         get(state) {
-            if(state.currentProfile.profileId === Profile.placeholder().profileId) {
+            if (state.currentProfile.profileId === Profile.placeholder().profileId) {
                 let currentProfile = localStorage.getItem(localStorageKey);
                 if (!currentProfile) return null;
                 state.currentProfile = JSON.parse(currentProfile);
             }
             return state.currentProfile;
         },
-        async getAll(state){
-            if(state.profiles.length===0) await api.school.getProfiles().then((response: any) => state.profiles = response);
+        async getAll(state) {
+            if (state.profiles.length === 0) await api.school.getProfiles().then((response: any) => state.profiles = response);
             return state.profiles;
         }
     },
@@ -34,19 +34,18 @@ const profileStore = new Vuex.Store({
             state.currentProfile = Profile.fromResponse(response);
             localStorage.setItem(localStorageKey, JSON.stringify(state.currentProfile))
         },
-        clear(state){
+        clear(state) {
             localStorage.removeItem(localStorageKey)
             state.currentProfile = Profile.placeholder();
             state.profiles = []
         }
     },
     actions: {
-        async refresh(ctx){
+        async refresh(ctx) {
             api.school.getProfiles().then((response: any) => ctx.state.profiles = response)
         }
     },
-    modules: {
-    }
+    modules: {}
 })
 
 export default profileStore;
