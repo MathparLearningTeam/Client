@@ -23,7 +23,7 @@
                 <strong>Director:</strong> {{school.director.profileName}}
             </div>
         </div>
-        <footer class="card-footer" v-if="profile.role==='Director'">
+        <footer class="card-footer" v-if="profile.role ==='Director'">
             <p class="card-footer-item">Edit</p>
             <p class="card-footer-item">Delete</p>
         </footer>
