@@ -10,19 +10,24 @@ export class EducationalPlans {
                         expired: true
                     },
                     {
-                        name: 'Practice 1',
+                        name: 'Practice 1. Key events in AI development.',
                         type: 'account-edit',
                         expired: true
                     },
                     {
-                        name: 'Final Exam',
+                        name: 'Practice 2. Modern AI development.',
+                        type: 'account-edit',
+                        expired: true
+                    },
+                    {
+                        name: 'Exam',
                         type: 'alarm',
                         expired: false
                     }
                 ]
             },
             {
-                name: 'Mathematical Analysis',
+                name: 'Developing AI for simplest problems',
                 items: [
                     {
                         name: 'Lecture 1',

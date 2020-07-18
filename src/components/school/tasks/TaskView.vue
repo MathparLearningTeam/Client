@@ -3,18 +3,13 @@
         <article class="message">
             <span class="question-num">46</span>
             <div class="message-body">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. <strong>Pellentesque risus mi</strong>, tempus
-                quis
-                placerat ut, porta nec nulla. Vestibulum rhoncus ac ex sit amet fringilla. Nullam gravida purus diam, et
-                dictum <a>felis venenatis</a> efficitur. Aenean ac <em>eleifend lacus</em>, in mollis lectus. Donec
-                sodales,
-                arcu et sollicitudin porttitor, tortor urna tempor ligula, id porttitor mi magna a neque. Donec dui
-                urna,
-                vehicula et sem eget, facilisis sodales sem.
-
+                <div v-model="condition">Find all the values of the parameter $a$ for each of them equation $$x^4+(a-3)^2= |x-a+3|+|x+a-3|$$ either has a unique solution, or no solutions.</div>
+                <vue-mathjax :formula="condition"></vue-mathjax>
                 <b-field label="Your answer" label-position="on-border">
-                    <b-input maxlength="200" type="textarea"></b-input>
+                    <b-input v-model="answer" maxlength="2000" type="textarea"></b-input>
                 </b-field>
+                <div>Answer preview:</div>
+                <vue-mathjax :formula="answer"></vue-mathjax>
             </div>
 
             <footer class="card-footer">
@@ -39,8 +34,18 @@
 </template>
 
 <script>
+    import { VueMathjax } from 'vue-mathjax'
     export default {
-        name: "TaskView"
+        components: {
+            'vue-mathjax': VueMathjax
+        },
+        name: "TaskView",
+        data(){
+            return {
+                condition: "",
+                answer: ""
+            }
+        }
     }
 </script>
 
