@@ -6,6 +6,8 @@ import Buefy from 'buefy'
 import 'buefy/dist/buefy.css'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import '@mdi/font/css/materialdesignicons.css'
+import VueMathjax from 'vue-mathjax'
 // @ts-ignore
 import { KinesisContainer, KinesisElement } from 'vue-kinesis'
 import moment from 'moment'
@@ -18,6 +20,7 @@ Vue.filter('formatDate', function(value) {
 Vue.component('kinesis-container', KinesisContainer)
 Vue.component('kinesis-element', KinesisElement)
 
+Vue.use(VueMathjax)
 Vue.use(VueAxios, axios)
 Vue.use(Buefy)
 

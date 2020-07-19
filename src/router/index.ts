@@ -80,7 +80,21 @@ const routes = [
       authenticated: true,
       redirectTo: '/'
     },
-    component: () => import('../views/school/School.vue')
+    component: () => import('../views/school/School.vue'),
+    children: [
+      {
+        path: '', component: () => import('../components/school/SchoolUsers.vue')
+      },
+      {
+        path: 'groups', component: () => import('../components/school/SchoolGroups.vue')
+      },
+      {
+        path: 'plans', component: () => import('../components/school/SchoolPlans.vue')
+      },
+      {
+        path: 'task/:id', component: () => import('../components/school/tasks/TaskView.vue')
+      }
+    ]
   }
 ];
 

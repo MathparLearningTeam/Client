@@ -16,9 +16,10 @@ API.interceptors.request.use(conf => {
     let token = authStore.getters.getToken;
     if(token) conf.headers['AUTH-TOKEN'] = token;
     let profile = profileStore.getters.get;
-    if(profile) conf.headers['PROFILE-ID'] = profile.profileId
+    if(profile) conf.headers['PROFILE-ID'] = profile.profileId;
     return conf;
-})
+});
+
 API.interceptors.response.use(resp => resp.data, (error) => {
     if (!error.response) return Promise.reject(error);
     switch (error.response.status) {
