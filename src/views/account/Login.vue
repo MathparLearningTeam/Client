@@ -2,7 +2,7 @@
     <div>
         <auth-header></auth-header>
         <div class="container registration">
-            <form name="loginForm" @submit.prevent="login">
+            <form name="loginForm">
                 <h1 class="title">Login</h1>
                 <section class="box" lang="en">
                     <b-field>
@@ -28,14 +28,12 @@
 </template>
 
 <script>
-    import accountMixin from "../../mixins/account";
     import AuthHeader from "../../components/shared/AuthHeader";
     import api from "../../api/api";
     import authenticationStore from "../../store/authenticationStore";
 
     export default {
         name: "Login",
-        mixins: [accountMixin],
         components: {
             AuthHeader
         },
@@ -50,11 +48,8 @@
         },
         methods: {
             login: function () {
-                this.authenticate(this.data)
-            },
-            authenticate: function (data) {
                 this.loading = true;
-                api.account.authenticate(data).then((response) => {
+                api.account.authenticate(this.data).then((response) => {
                         authenticationStore.commit('setToken', response.token)
                         //@ts-ignore
                         this.$router.push('/account');
