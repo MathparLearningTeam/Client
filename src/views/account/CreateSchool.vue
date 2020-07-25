@@ -12,7 +12,8 @@
             </b-field>
             <b-button type="is-primary"
                       v-on:click="createSchool"
-                      :disabled="!createSchoolPressed" expanded>Create school!</b-button>
+                      :disabled="createSchoolPressed" expanded>Create school!
+            </b-button>
         </div>
     </section>
 </template>
@@ -22,26 +23,26 @@
     import schoolStore from "../../store/schoolStore";
 
     export default {
-        props: ['createSchoolPressed'],
         data() {
             return {
                 createSchoolForm: {
                     schoolName: '',
                     schoolAddress: ''
-                }
+                },
+                createSchoolPressed: false
             }
         },
         methods: {
             createSchool: function () {
                 this.createSchoolPressed = true
                 api.school.createSchool(this.createSchoolForm).then(response => {
-                    console.log(`Working with create school response ${response}`)
-                    schoolStore.commit('set', response)
-                    this.$router.push("/school")
-                },
-                error => {
-                    this.createSchoolPressed = false
-                });
+                        console.log(`Working with create school response ${response}`)
+                        schoolStore.commit('set', response)
+                        this.$router.push("/school")
+                    },
+                    error => {
+                        this.createSchoolPressed = false
+                    });
             }
         }
     }

@@ -22,21 +22,8 @@
                 </div>
 
                 <hr>
-<!--                <div class="card">-->
-<!--                    <nav class="panel">-->
-<!--                        <p class="panel-heading">Create school</p>-->
-<!--                        <div class="panel-block">-->
-<!--                            <b-input type="text" v-model="createSchoolForm.schoolName"-->
-<!--                                     placeholder="Enter school name"></b-input>-->
-<!--                            <b-input type="text" v-model="createSchoolForm.schoolAddress"-->
-<!--                                     placeholder="Enter school address"></b-input>-->
-<!--                        </div>-->
-<!--                        <div class="panel-block">-->
-<!--                            <b-button v-on:click="createSchool" type="is-primary" expanded>Create school!</b-button>-->
-<!--                        </div>-->
-<!--                    </nav>-->
-<!--                </div>-->
-                <CreateSchool createSchoolPressed="false"/>
+
+                <CreateSchool/>
             </div>
         </div>
     </div>
@@ -46,8 +33,6 @@
     import accountStore from "../../store/accountStore";
     import AuthenticatedHeader from "../../components/shared/AuthenticatedHeader";
     import Avatar from "../../components/blocks/Avatar";
-    import api from "../../api/api";
-    import schoolStore from "../../store/schoolStore";
     import UserCard from "../../components/profile/user-card";
     import CreateSchool from "./CreateSchool";
 
@@ -67,27 +52,12 @@
                 changePasswordForm: {
                     password: '',
                     passwordConfirmation: ''
-                },
-                createSchoolForm: {
-                    schoolName: '',
-                    schoolAddress: ''
                 }
             }
         },
         methods: {
             changePassword: function () {
                 console.log("Changing password, all right!")
-            },
-            createSchool: function () {
-                this.createSchoolPressed = true
-                api.school.createSchool(this.createSchoolForm).then(response => {
-                    console.log(`Working with create school response ${response}`)
-                    schoolStore.commit('set', response)
-                    this.$router.push("/school")
-                },
-                error => {
-                    this.createSchoolPressed = false;
-                });
             }
         },
         async mounted() {
