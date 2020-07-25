@@ -1,14 +1,14 @@
 <template>
     <section class="modal-card-body">
-        <h3 class="title has-text-centered has-text-dark">Create school:</h3>
+        <h3 class="title has-text-centered has-text-dark">School creation:</h3>
         <div class="box">
             <p>Enter your school name:</p>
             <b-field>
-                <b-input placeholder="School name"></b-input>
+                <b-input v-model="createSchoolForm.schoolName" placeholder="School name" required></b-input>
             </b-field>
             <p>Enter your school address:</p>
             <b-field>
-                <b-input placeholder="School address"></b-input>
+                <b-input v-model="createSchoolForm.schoolAddress" placeholder="School address" required></b-input>
             </b-field>
             <b-button type="is-primary"
                       v-on:click="createSchool"
