@@ -4,11 +4,17 @@
         <div id="main-container">
             <div class="card">
                 <nav class="panel">
-                    <p class="panel-heading">Choose profile from the list:</p>
-                    <a class="panel-block" v-for="profile in profiles" v-on:click="chooseProfile(profile)">
-                        <span class="panel-icon"><i class="fas fa-user" aria-hidden="true"></i></span>
-                        {{profile.profileName}} (created {{profile.creationDate | formatDate}})
-                    </a>
+                    <div v-if="profiles.length === 0">
+                        <p>Seems you don't have schools. Let's create one!</p>
+                        <CreateSchool/>
+                    </div>
+                    <div v-if="profiles.length > 0">
+                        <p class="panel-heading">Choose profile from the list:</p>
+                        <a class="panel-block" v-for="profile in profiles" v-on:click="chooseProfile(profile)">
+                            <span class="panel-icon"><i class="fas fa-user" aria-hidden="true"></i></span>
+                            {{profile.profileName}} (created {{profile.creationDate | formatDate}})
+                        </a>
+                    </div>
                 </nav>
             </div>
         </div>
@@ -19,17 +25,21 @@
     import profileStore from "../store/profileStore";
     import schoolStore from "../store/schoolStore";
     import AuthenticatedHeader from "../components/shared/AuthenticatedHeader";
+    import CreateSchool from "./account/CreateSchool";
 
     export default {
         name: "ChooseProfile",
-        components: {AuthenticatedHeader},
-        data(){
+        components: {
+            AuthenticatedHeader,
+            CreateSchool
+        },
+        data() {
             return {
                 profiles: []
             }
         },
-        methods:{
-            chooseProfile: function(profile){
+        methods: {
+            chooseProfile: function (profile) {
                 schoolStore.commit('clear')
                 profileStore.commit('set', profile)
                 this.$router.push('/school')
@@ -43,7 +53,7 @@
 </script>
 
 <style scoped lang="scss">
-    #main-container{
+    #main-container {
         margin: auto;
         background-color: white;
         border-radius: 5px;
@@ -55,7 +65,7 @@
             text-align: left;
         }
 
-        #header{
+        #header {
             height: 25%;
             padding: 5px;
             display: flex;
@@ -69,10 +79,10 @@
             font-weight: bold;
         }
 
-        #list-container{
+        #list-container {
             padding: 10px;
 
-            .list-item:hover{
+            .list-item:hover {
                 cursor: pointer;
             }
         }
