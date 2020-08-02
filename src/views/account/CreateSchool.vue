@@ -12,7 +12,7 @@
             </b-field>
             <b-button type="is-primary"
                       v-on:click="createSchool"
-                      :disabled="createSchoolPressed" expanded>Create school!
+                      :disabled="!(isCompleted && clickAllowed)" expanded>Create school!
             </b-button>
         </div>
     </section>
@@ -29,20 +29,43 @@
                     schoolName: '',
                     schoolAddress: ''
                 },
-                createSchoolPressed: false
+                clickAllowed: false
+            }
+        },
+        computed: {
+            isCompleted() {
+                let formFilled = this.createSchoolForm.schoolName && this.createSchoolForm.schoolAddress;
+                if (formFilled) {
+                    this.clickAllowed = true
+                }
+                return formFilled;
             }
         },
         methods: {
             createSchool: function () {
-                this.createSchoolPressed = true
+                this.clickAllowed = false
                 api.school.createSchool(this.createSchoolForm).then(response => {
                         console.log(`Working with create school response ${response}`)
                         schoolStore.commit('set', response)
+                        this.$buefy.dialog.alert({
+                            title: "Success!",
+                            message: "Your invitation request was successfully sent",
+                            confirmText: "OK",
+                            hasIcon: true,
+                            icon: "check"
+                        })
                         this.$router.push("/school")
                     },
                     error => {
-                        this.createSchoolPressed = false
-                    });
+                        this.$buefy.dialog.alert({
+                            title: "Error!",
+                            message: "School wasn't created, change your input values.",
+                            type: 'is-danger',
+                            hasIcon: true,
+                            icon: "view-dashboard",
+                            confirmText: "OK",
+                        })
+                    })
             }
         }
     }
