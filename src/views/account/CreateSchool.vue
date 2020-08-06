@@ -45,7 +45,6 @@
             createSchool: function () {
                 this.clickAllowed = false
                 api.school.createSchool(this.createSchoolForm).then(response => {
-                        console.log(`Working with create school response ${response}`)
                         schoolStore.commit('set', response)
                         this.$buefy.dialog.alert({
                             title: "Success!",
