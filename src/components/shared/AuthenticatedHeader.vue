@@ -1,5 +1,6 @@
 <template>
     <div id="nav">
+        <router-link to="/apply-for-position">Apply for position</router-link>
         <router-link to="/choose-profile">Choose profile</router-link>
         <router-link to="/logout">Logout</router-link>
     </div>

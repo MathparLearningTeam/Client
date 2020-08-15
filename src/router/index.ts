@@ -5,88 +5,111 @@ import {authenticated, notAuthenticated} from "@/router/interceptors";
 Vue.use(VueRouter);
 
 const routes = [
-  {
-    path: '/',
-    name: 'home',
-    component: () => import('../views/Home.vue')
-  },
-  {
-    path: '/registration',
-    name: 'registration',
-    meta: {
-      notAuthenticated: true,
-      redirectTo: 'account'
+    {
+        path: '/',
+        name: 'home',
+        component: () => import('../views/Home.vue')
     },
-    component: () => import('../views/account/Registration.vue'),
-  },
-  {
-    path: '/login',
-    name: 'login',
-    meta: {
-      notAuthenticated: true,
-      redirectTo: 'account'
+    {
+        path: '/registration',
+        name: 'registration',
+        meta: {
+            notAuthenticated: true,
+            redirectTo: 'account'
+        },
+        component: () => import('../views/account/Registration.vue'),
     },
-    component: () => import('../views/account/Login.vue')
-  },
-  {
-    path: '/restore',
-    name: 'restore',
-    meta: {
-      notAuthenticated: true,
-      redirectTo: 'account'
+    {
+        path: '/login',
+        name: 'login',
+        meta: {
+            notAuthenticated: true,
+            redirectTo: 'account'
+        },
+        component: () => import('../views/account/Login.vue')
     },
-    component: () => import('../views/account/RestorePassword.vue')
-  },
-  {
-    path: '/restore/:t',
-    name: 'set-password',
-    meta: {
-      notAuthenticated: true,
-      redirectTo: 'account'
+    {
+        path: '/restore',
+        name: 'restore',
+        meta: {
+            notAuthenticated: true,
+            redirectTo: 'account'
+        },
+        component: () => import('../views/account/RestorePassword.vue')
     },
-    component: () => import('../views/account/SetPassword.vue')
-  },
-  {
-    path: '/account',
-    name: 'account',
-    meta: {
-      authenticated: true,
-      redirectTo: 'login'
+    {
+        path: '/restore/:t',
+        name: 'set-password',
+        meta: {
+            notAuthenticated: true,
+            redirectTo: 'account'
+        },
+        component: () => import('../views/account/SetPassword.vue')
     },
-    component: () => import('../views/account/Account.vue')
-  },
-  {
-    path: '/logout',
-    name: 'logout',
-    meta: {
-      authenticated: true,
-      redirectTo: '/'
+    {
+        path: '/account',
+        name: 'account',
+        meta: {
+            authenticated: true,
+            redirectTo: 'login'
+        },
+        component: () => import('../views/account/Account.vue')
     },
-    component: () => import('../views/Logout.vue')
-  },
-  {
-    path: '/choose-profile',
-    name: 'ChooseProfile',
-    meta: {
-      authenticated: true,
-      redirectTo: '/login'
+    {
+        path: '/logout',
+        name: 'logout',
+        meta: {
+            authenticated: true,
+            redirectTo: '/'
+        },
+        component: () => import('../views/Logout.vue')
     },
-    component: () => import('../views/ChooseProfile.vue')
-  },
-  {
-    path: '/school',
-    name: 'School',
-    meta: {
-      authenticated: true,
-      redirectTo: '/'
+    {
+        path: '/choose-profile',
+        name: 'ChooseProfile',
+        meta: {
+            authenticated: true,
+            redirectTo: '/login'
+        },
+        component: () => import('../views/ChooseProfile.vue')
     },
-    component: () => import('../views/school/School.vue')
-  }
+    {
+        path: '/apply-for-position',
+        name: 'ApplyForPositionCard',
+        meta: {
+            authenticated: true,
+            redirectTo: '/login'
+        },
+        component: () => import('../views/account/ApplyForPositionCard.vue')
+    },
+    {
+        path: '/school',
+        name: 'School',
+        meta: {
+            authenticated: true,
+            redirectTo: '/'
+        },
+        component: () => import('../views/school/School.vue'),
+        children: [
+            {
+                path: '', component: () => import('../components/school/SchoolUsers.vue')
+            },
+            {
+                path: 'groups', component: () => import('../components/school/SchoolGroups.vue')
+            },
+            {
+                path: 'plans', component: () => import('../components/school/SchoolPlans.vue')
+            },
+            {
+                path: 'task/:id', component: () => import('../components/school/tasks/TaskView.vue')
+            }
+        ]
+    }
 ];
 
 const router = new VueRouter({
-  base: process.env.BASE_URL,
-  routes
+    base: process.env.BASE_URL,
+    routes
 });
 
 router.beforeEach(authenticated);
