@@ -7,7 +7,7 @@
 <style lang="scss">
     body {
         background: linear-gradient(320deg, #FC466B 0%, #3F5EFB 100%);
-        height: 100vh;
+        height: 160vh;
 
         .white {
             color: white;
