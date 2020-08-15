@@ -2,7 +2,7 @@ name: check that build passes
 
 on:
   pull_request:
-    branches:
+    branches: 
       - master
       - integration
 
