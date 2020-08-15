@@ -21,6 +21,7 @@
 <script>
     import api from "../../api/api";
     import schoolStore from "../../store/schoolStore";
+    import dialog from "../../mixins/dialog";
 
     export default {
         data() {
@@ -32,6 +33,7 @@
                 clickAllowed: false
             }
         },
+        mixins: [dialog],
         computed: {
             isCompleted() {
                 let formFilled = this.createSchoolForm.schoolName && this.createSchoolForm.schoolAddress;
@@ -46,24 +48,11 @@
                 this.clickAllowed = false
                 api.school.createSchool(this.createSchoolForm).then(response => {
                         schoolStore.commit('set', response)
-                        this.$buefy.dialog.alert({
-                            title: "Success!",
-                            message: "Your invitation request was successfully sent",
-                            confirmText: "OK",
-                            hasIcon: true,
-                            icon: "check"
-                        })
+                        dialog.methods.openDialogSuccess("School was created!")
                         this.$router.push("/school")
                     },
                     error => {
-                        this.$buefy.dialog.alert({
-                            title: "Error!",
-                            message: "School wasn't created, change your input values.",
-                            type: 'is-danger',
-                            hasIcon: true,
-                            icon: "view-dashboard",
-                            confirmText: "OK",
-                        })
+                        dialog.methods.openDialogError("School wasn't created, change your input values.")
                     })
             }
         }

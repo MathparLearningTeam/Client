@@ -46,8 +46,6 @@
         },
         data() {
             return {
-                message: '',
-                createSchoolPressed: false,
                 account: {},
                 changePasswordForm: {
                     password: '',
