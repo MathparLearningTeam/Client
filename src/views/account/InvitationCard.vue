@@ -48,7 +48,7 @@
                 },
                 positionList: [
                     {name: 'Teacher'},
-                    {name: 'Head Teacher'}
+                    {name: 'HeadTeacher'}
                 ]
             }
         },
