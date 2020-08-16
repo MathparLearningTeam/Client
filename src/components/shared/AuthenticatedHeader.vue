@@ -1,5 +1,6 @@
 <template>
     <div id="nav">
+        <router-link to="/account">My account</router-link>
         <router-link to="/apply-for-position">Apply for position</router-link>
         <router-link to="/choose-profile">Choose profile</router-link>
         <router-link to="/logout">Logout</router-link>
@@ -14,6 +15,7 @@
 
 <style scoped lang="scss">
     #nav {
+        margin: 0px;
         padding: 30px;
         text-align: right;
 
@@ -24,8 +26,8 @@
             margin: 10px;
 
             &.router-link-exact-active {
-                 opacity: 1;
-             }
+                opacity: 1;
+            }
         }
     }
 </style>
