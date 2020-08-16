@@ -46,6 +46,12 @@
         methods: {
             createSchool: function () {
                 this.clickAllowed = false
+                api.school.isNameAvailable(this.createSchoolForm.schoolName).then(nameAvailable => {
+                    if (nameAvailable !== true) {
+                        dialog.methods.openDialogError("School wasn't created, name is not available.")
+                        return;
+                    }
+                })
                 api.school.createSchool(this.createSchoolForm).then(response => {
                         schoolStore.commit('set', response)
                         dialog.methods.openDialogSuccess("School was created!")
