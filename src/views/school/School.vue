@@ -1,5 +1,6 @@
 <template>
     <div>
+        <authenticated-header></authenticated-header>
         <section class="sidebar-layout">
             <school-sidebar v-bind:school="school"></school-sidebar>
             <div class="content">
@@ -21,13 +22,15 @@
     import {School} from "../../models/School";
     import SchoolSidebar from "../../components/school/SchoolSidebar";
     import schoolStore from "../../store/schoolStore";
+    import AuthenticatedHeader from "../../components/shared/AuthenticatedHeader";
 
     export default {
         name: "SchoolProfile",
         mixins: [SchoolMixin],
         components: {
             SchoolSidebar,
-            SchoolUsers
+            SchoolUsers,
+            AuthenticatedHeader
         },
         data() {
             return {
@@ -54,9 +57,11 @@
     .slide-fade-enter-active {
         transition: all .3s ease;
     }
+
     .slide-fade-leave-active {
         transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
     }
+
     .slide-fade-enter, .slide-fade-leave-to {
         transform: translateY(10px);
         opacity: 0;
