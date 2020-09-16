@@ -7,15 +7,16 @@
         <div class="home-dialog">
             <div class="card home-dialog__card">
                 <div class="card-content">
-                    <p class="title">“Hello, I'm Mathpar!”</p>
-                    <p class="subtitle">Such beautiful much title</p>
+                    <p class="title">Welcome to Mathpar notebook!</p>
+                    <hr>
+                    <p class="subtitle">Created in NaUKMA</p>
                 </div>
                 <footer class="card-footer">
                     <p class="card-footer-item">
-                        <router-link to="/login">I know right!</router-link>
+                        <router-link to="/login">Login</router-link>
                     </p>
                     <p class="card-footer-item">
-                        <router-link to="/registration">I'm a young padawan...</router-link>
+                        <router-link to="/registration">Register</router-link>
                     </p>
                 </footer>
             </div>
@@ -31,8 +32,13 @@
 
 <style lang="scss">
     .home-dialog {
-        .title, .subtitle {
+        .title {
             color: black;
+        }
+
+        .subtitle {
+            color: black;
+            font-weight: lighter;
         }
 
         position: fixed;
@@ -49,6 +55,7 @@
             height: 300px;
             display: flex;
             flex-direction: column;
+            opacity: 95%;
 
             .card-footer {
                 margin-top: auto;
