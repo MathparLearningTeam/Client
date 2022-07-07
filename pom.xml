@@ -9,8 +9,8 @@
     <description>This module serves to distribute client assets to other modules.</description>
 
     <scm>
-        <url>https://github.com/MathparLearningTeam/Client.git</url>
-        <developerConnection>svm:git:https://github.com/MathparLearningTeam/Client.git</developerConnection>
+        <url>https://github.com/MathParDev/ClientDev.git</url>
+        <developerConnection>svm:git:https://github.com/MathParDev/ClientDev.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
 
@@ -105,7 +105,7 @@
         <repository>
             <id>github-mathpar</id>
             <name>GitHub packages repository</name>
-            <url>https://maven.pkg.github.com/MathparLearningTeam/Client</url>
+            <url>https://maven.pkg.github.com/MathParDev/ClientDev</url>
         </repository>
     </distributionManagement>
 </project>
